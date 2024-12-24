@@ -1,30 +1,24 @@
 module.exports = {
   run: [
-    // Delete this step if your project does not use torch
+    // Edit this step with your custom install commands
     {
-      method: "script.start",
+      method: "shell.run",
       params: {
-        uri: "torch.js",
-        params: {
-          venv: "env",                // Edit this to customize the venv folder path
-          // xformers: true   // uncomment this line if your project requires xformers
-        }
+        message: [
+          "git clone https://github.com/coleam00/bolt.new-any-llm app",
+          "cp app/.env.example app/.env"
+        ],
       }
     },
     // Edit this step with your custom install commands
     {
       method: "shell.run",
-      params: {
-        venv: "env",                // Edit this to customize the venv folder path
+      params: {           // Edit this to customize the venv folder path
+        path: "app",
         message: [
-          "pip install -r requirements.txt"
+          "npm config set registry https://registry.npmmirror.com",
+          "pnpm install"
         ],
-      }
-    },
-    {
-      method: "fs.link",
-      params: {
-        venv: "env"
       }
     }
   ]
